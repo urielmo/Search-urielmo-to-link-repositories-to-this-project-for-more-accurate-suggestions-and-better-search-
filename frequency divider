@@ -1,8 +1,6 @@
 module frequency_divider(clk,clk_2,clk_4,clk_8,clk_16,reset);
   
  output clk_2,clk_4,clk_8,clk_16;
-  
-  
   input clk,reset;
   reg [3:0] count=4'b0000;
   always @ ( posedge clk)
@@ -15,19 +13,22 @@ module frequency_divider(clk,clk_2,clk_4,clk_8,clk_16,reset);
   assign clk_2=count[0];
   assign clk_4=count[1];
   assign clk_8=count[2];
-  assign clk_16=count[3];
-
-   
+  assign clk_16=count[3]; 
+  
 endmodule
 
 module test;
+
   wire clk_2,clk_4,clk_8,clk_16;
   reg clk,reset;
+  
 frequency_divider c1(clk,clk_2,clk_4,clk_8,clk_16,reset);
+
   initial begin
   $dumpfile("dump.vcd");
   $dumpvars(1);
 end
+
   initial 
    clk=0;
   always @ (clk)
@@ -40,6 +41,7 @@ end
      #800 reset=1;
      #200 $finish;
      end
-     endmodule
+     
+ endmodule
 
 
