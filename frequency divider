@@ -23,6 +23,26 @@ module frequency divider(clk,clk_2,clk_4,clk_8,clk_16,reset);
    
 endmodule
 
+module test;
+  wire clk_2,clk_4,clk_8,clk_16;
+  reg clk,reset;
+frequency divider c1(clk,clk_2,clk_4,clk_8,clk_16,reset);
+  initial begin
+  $dumpfile("dump.vcd");
+  $dumpvars(1);
+end
+  initial 
+   clk=0;
+  always @ (clk)
+  #25 clk<=~clk;
 
+ initial
+   begin
+     $dumpfile("dump.vcd");
+  reset=0;   
+     #800 reset=1;
+     #200 $finish;
+     end
+     endmodule
 
 
